@@ -7,3 +7,4 @@ colorama
 python-dotenv
 pymongo
 motor
+python-telegram-bot

@@ -14,7 +14,7 @@ async def ai_generate_response(prompt: str, chat_history: list[dict[str, Any]], 
     system_prompt = generate_system_message(knowledge_base)
     client = AsyncOpenAI(api_key=API_KEY, base_url=BASE_URL)
 
-    response = await client.chat.completions.create(  # type: ignore
+    response = await client.chat.completions.create(
         model=MODEL,
         messages=[
             {"role": "system", "content": system_prompt},
@@ -26,4 +26,4 @@ async def ai_generate_response(prompt: str, chat_history: list[dict[str, Any]], 
         top_p=1
     )
 
-    return response.choices[0].message.content  # type: ignore
+    return response.choices[0].message.content
