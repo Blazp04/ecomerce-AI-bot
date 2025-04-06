@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - 8000"
+      - "8000"
     environment:
       - SERVICE_FQDN_CHATBOT
       - PORT=8000
