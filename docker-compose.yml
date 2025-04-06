@@ -6,27 +6,25 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000"
+      - 8000"
     environment:
       - SERVICE_FQDN_CHATBOT
       - PORT=8000
       - LLM_PROVIDER_KEY=${LLM_PROVIDER_KEY}
       - BASE_URL=${BASE_URL}
       - MODEL=${MODEL}
-      - MONGO_USERNAME=mongo
-      - MONGO_PASSWORD=mongo
-      - MONGO_HOST=mongodb
-      - MONGO_PORT=27017
+      - MONGO_USERNAME=${MONGO_USERNAME}
+      - MONGO_PASSWORD=${MONGO_PASSWORD}
+      - MONGO_HOST=${MONGO_HOST-mongodb}
+      - MONGO_PORT=${MONGO_PORT}
       - WOOCOMMERCE_URL=${WOOCOMMERCE_URL}
       - WOOCOMMERCE_CONSUMER_KEY=${WOOCOMMERCE_CONSUMER_KEY}
       - WOOCOMMERCE_CONSUMER_SECRET=${WOOCOMMERCE_CONSUMER_SECRET}
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
     restart: unless-stopped
     depends_on:
-      - mongodb
-    networks:
-      - coolify_network
-
+      mongodb:
+        condition: service_healthy
   mongodb:
     image: mongo:6
     container_name: mongodb
@@ -34,16 +32,10 @@ services:
     ports:
       - "27017:27017"
     environment:
-      MONGO_INITDB_ROOT_USERNAME: mongo
-      MONGO_INITDB_ROOT_PASSWORD: mongo
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
     volumes:
       - mongodb_data:/data/db
-    networks:
-      - coolify_network
-
-networks:
-  coolify_network:
-    driver: bridge
 
 volumes:
   mongodb_data:
