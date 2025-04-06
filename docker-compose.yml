@@ -1,13 +1,14 @@
 version: "3.8"
 
 services:
-  fastapi_app:
+  chatbot:
     build:
       context: .
       dockerfile: Dockerfile
     ports:
       - 8000"
     environment:
+      - SERVICE_FQDN_CHATBOT
       - PORT=8000
       - LLM_PROVIDER_KEY=${LLM_PROVIDER_KEY}
       - BASE_URL=${BASE_URL}
