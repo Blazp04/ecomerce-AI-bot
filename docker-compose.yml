@@ -6,7 +6,7 @@ services:
       context: .
       dockerfile: Dockerfile
     ports:
-      - "8000:8000"
+      - 8000"
     environment:
       - PORT=8000
       - LLM_PROVIDER_KEY=${LLM_PROVIDER_KEY}

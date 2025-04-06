@@ -94,8 +94,7 @@ async def delete():
 
 @app.get("/health")
 async def health_check():
-    res = await get_woocomerce_products()
-    return {"response": res}
+    return {"status": "ok"}
 
 
 def start_api():
