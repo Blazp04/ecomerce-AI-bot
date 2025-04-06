@@ -1,0 +1,9 @@
+woocommerce
+fastapi
+uvicorn
+requests
+openai
+colorama
+python-dotenv
+pymongo
+motor
