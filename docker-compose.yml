@@ -26,7 +26,7 @@ services:
       mongodb:
         condition: service_healthy
   mongodb:
-    image: mongo:6
+    image: mongo:5
     container_name: mongodb
     restart: always
     ports:
@@ -38,10 +38,10 @@ services:
       - mongodb_data:/data/db
     healthcheck:
       test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-      interval: 30s
+      interval: 10s
+      timeout: 5s
       retries: 3
-      start_period: 20s
-      timeout: 10s
+      start_period: 30s
 
 volumes:
   mongodb_data:
