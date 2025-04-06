@@ -13,7 +13,7 @@ services:
       - LLM_PROVIDER_KEY=${LLM_PROVIDER_KEY}
       - BASE_URL=${BASE_URL}
       - MODEL=${MODEL}
-      - MONGO_USERNAME=${MONGO_USERNAME}
+      - MONGO_USER=${MONGO_USER}
       - MONGO_PASSWORD=${MONGO_PASSWORD}
       - MONGO_HOST=${MONGO_HOST-mongodb}
       - MONGO_PORT=${MONGO_PORT}
@@ -32,15 +32,15 @@ services:
     ports:
       - "27017:27017"
     environment:
-      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USERNAME}
+      - MONGO_INITDB_ROOT_USERNAME=${MONGO_USER}
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
     volumes:
       - mongodb_data:/data/db
     healthcheck:
-      test: ["CMD", "mongo", "--eval", "db.adminCommand('ping')"]
+      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
       interval: 30s
       retries: 3
-      start_period: 10s
+      start_period: 20s
       timeout: 10s
 
 volumes:
