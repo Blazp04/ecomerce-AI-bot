@@ -22,6 +22,8 @@ async def get_chat_history(phone_number: str) -> list[dict[str, Any]]:
     db = client[DB_NAME]
     collection = db[COLLECTION_NAME]
     doc = await collection.find_one({}, {f"chats.{phone_number}": 1, "_id": 0})
+    if doc is None:
+        return []
     return doc.get("chats", {}).get(phone_number, [])
 
 
