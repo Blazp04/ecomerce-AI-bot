@@ -23,8 +23,8 @@ services:
       - TELEGRAM_BOT_TOKEN=${TELEGRAM_BOT_TOKEN}
     restart: unless-stopped
     depends_on:
-      mongodb:
-        condition: service_healthy
+      - mongodb
+
   mongodb:
     image: mongo:4
     container_name: mongodb
@@ -36,12 +36,6 @@ services:
       - MONGO_INITDB_ROOT_PASSWORD=${MONGO_PASSWORD}
     volumes:
       - mongodb_data:/data/db
-    healthcheck:
-      test: ["CMD", "mongosh", "--eval", "db.adminCommand('ping')"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
-      start_period: 30s
 
 volumes:
   mongodb_data:
